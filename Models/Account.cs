@@ -3,9 +3,8 @@ namespace DreamCash.Models
 {
     public class Account
     {
-        public Account(decimal amount, int userId)
+        public Account(int userId)
         {
-            Amount = amount;
             UserId = userId;
         }
 

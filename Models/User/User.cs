@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DreamCash.Services;
 
 namespace DreamCash.Models
@@ -29,7 +30,13 @@ namespace DreamCash.Models
         public string Address { get; set; }
         public int AccountId { get; set; }
         public Account Account { get; set; }
+        public List<Transaction> Transactions { get; set; }
+        public List<Investiment> Investiments { get; set; }
 
+        public void AddAccountId(int accountId)
+        {
+            AccountId = accountId;
+        }
         public void HidePassword()
         {
             Password = "";

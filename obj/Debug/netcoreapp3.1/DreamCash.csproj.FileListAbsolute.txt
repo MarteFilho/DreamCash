@@ -41,3 +41,8 @@ C:\Users\marco\source\repos\DreamCash\DreamCash\obj\Debug\netcoreapp3.1\DreamCas
 C:\Users\marco\source\repos\DreamCash\DreamCash\obj\Debug\netcoreapp3.1\DreamCash.pdb
 C:\Users\marco\source\repos\DreamCash\DreamCash\obj\Debug\netcoreapp3.1\DreamCash.genruntimeconfig.cache
 C:\Users\marco\source\repos\DreamCash\DreamCash\bin\Debug\netcoreapp3.1\CryptSharp.dll
+C:\Users\marco\source\repos\DreamCash\DreamCash\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\marco\source\repos\DreamCash\DreamCash\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\marco\source\repos\DreamCash\DreamCash\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\marco\source\repos\DreamCash\DreamCash\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\marco\source\repos\DreamCash\DreamCash\obj\Debug\netcoreapp3.1\DreamCash.MvcApplicationPartsAssemblyInfo.cs

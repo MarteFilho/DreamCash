@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using DreamCash.Models.Admin;
@@ -32,9 +33,9 @@ namespace DreamCash.Controllers
 
                 return BadRequest("Senha inválida, favor verificar!");
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest("Erro ao realizar o login do administrador, favor tentar novamente!");
+                return BadRequest("Erro ao realizar o login do administrador, favor tentar novamente! " + ex.Message);
             }
         }
     }
