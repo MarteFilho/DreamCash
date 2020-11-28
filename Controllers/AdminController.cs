@@ -29,7 +29,7 @@ namespace DreamCash.Controllers
                     return NotFound("Administrador não encontrado!");
 
                 if (admin.Login(model.Password))
-                    return Ok(new { Message = "Administrador autenticado com sucesso!", admin });
+                    return Ok("Administrador autenticado com sucesso!");
 
                 return BadRequest("Senha inválida, favor verificar!");
             }
@@ -37,6 +37,27 @@ namespace DreamCash.Controllers
             {
                 return BadRequest("Erro ao realizar o login do administrador, favor tentar novamente! " + ex.Message);
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Admin model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            model.EncryptPassword();
+            try
+            {
+                await _context.AddAsync(model);
+                await _context.SaveChangesAsync();
+
+                model.HidePassword();
+                return Ok(model);
+            }
+            catch
+            {
+                return BadRequest("Erro ao criar o usuário, favor tentar novamente!");
+            }
+
         }
     }
 }

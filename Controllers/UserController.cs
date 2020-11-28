@@ -127,7 +127,10 @@ namespace DreamCash.Controllers
                     return NotFound("Usuário não encontrado!");
 
                 if (user.Login(model.Password))
-                    return Ok(new { Message = "Usuário autenticado com sucesso!", user });
+                {
+                    user.HidePassword();
+                    return Ok(new { Message = "Usuário autenticado com sucesso!", });
+                }
 
                 return Unauthorized("Senha inválida, favor verificar!");
             }
