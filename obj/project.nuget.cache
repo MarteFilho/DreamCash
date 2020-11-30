@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "JcQvwclGp2kk2W5V+3wQ13+4bZ6GcmrMWpshK82P/r0vwLi9p+/Zml9ACOpmG0EPs8czfKKVlEzem625XLMXsQ==",
+  "dgSpecHash": "OqyViQr0mENB1GLDtIcakuhp9rSzHRfJ59U/1UfnspiwPCLW9gj4mBBjBoAdVLdyOsnONiL30xUWGcxgLIZNKg==",
   "success": true,
   "projectFilePath": "C:\\Users\\marco\\source\\repos\\DreamCash\\DreamCash\\DreamCash.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marco\\.nuget\\packages\\cryptsharpofficial\\2.1.0\\cryptsharpofficial.2.1.0.nupkg.sha512",
+    "C:\\Users\\marco\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.0.0\\microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
+    "C:\\Users\\marco\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.3.0.0.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -27,6 +29,8 @@
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\marco\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\marco\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\npgsql\\4.1.3.1\\npgsql.4.1.3.1.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\3.1.4\\npgsql.entityframeworkcore.postgresql.3.1.4.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
