@@ -130,7 +130,7 @@ namespace DreamCash.Controllers
                 if (user.Login(model.Password))
                 {
                     user.HidePassword();
-                    return Ok(new { Message = "Usuário autenticado com sucesso!", });
+                    return Ok(new { Message = "Usuário autenticado com sucesso!", UserId = user.Id });
                 }
 
                 return Unauthorized("Senha inválida, favor verificar!");
