@@ -1,8 +1,8 @@
-﻿using System;
+﻿
 
 namespace DreamCash.Models
 {
-    public class Investiment
+    public class Investiment : Entity
     {
         public Investiment(string type, string description)
         {
@@ -10,7 +10,6 @@ namespace DreamCash.Models
             Description = description;
         }
 
-        public int Id { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
     }

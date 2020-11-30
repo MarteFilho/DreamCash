@@ -2,9 +2,9 @@
 
 namespace DreamCash.Models
 {
-    public class Transaction
+    public class Transaction : Entity
     {
-        public Transaction(string name, int userId, int accountId, int investimentId, decimal value, DateTime investimentDate)
+        public Transaction(string name, Guid userId, Guid accountId, Guid investimentId, decimal value, DateTime investimentDate)
         {
             Name = name;
             UserId = userId;
@@ -14,13 +14,12 @@ namespace DreamCash.Models
             InvestimentDate = investimentDate;
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
-        public int AccountId { get; set; }
+        public Guid AccountId { get; set; }
         public Account Account { get; set; }
-        public int InvestimentId { get; set; }
+        public Guid InvestimentId { get; set; }
         public Investiment Investiment { get; set; }
         public decimal Value { get; set; }
         public DateTime InvestimentDate { get; set; }

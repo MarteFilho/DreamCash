@@ -17,7 +17,7 @@ namespace DreamCash.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] int userId)
+        public async Task<IActionResult> Get([FromQuery] Guid userId)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace DreamCash.Controllers
 
         [HttpGet]
         [Route("dailyreport")]
-        public async Task<IActionResult> DailyReport([FromQuery] int userId)
+        public async Task<IActionResult> DailyReport([FromQuery] Guid userId)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace DreamCash.Controllers
 
         [HttpGet]
         [Route("balance")]
-        public async Task<IActionResult> GetUserBalance([FromQuery] int userId)
+        public async Task<IActionResult> GetUserBalance([FromQuery] Guid userId)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace DreamCash.Controllers
 
         [HttpGet]
         [Route("investments")]
-        public async Task<IActionResult> GetUserInvestments([FromQuery] int userId)
+        public async Task<IActionResult> GetUserInvestments([FromQuery] Guid userId)
         {
             try
             {
@@ -88,28 +88,29 @@ namespace DreamCash.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User model)
+        public async Task<IActionResult> Create([FromBody] CreateUserViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                model.EncryptPassword();
+                var user = new User(model.Name, model.Document, model.Email, model.Password, model.Phone, model.Birthday, model.Sex, model.Address);
+                user.EncryptPassword();
 
-                Account userAccount = new Account(model.Id);
-                model.AddAccountId(userAccount.Id);
+                Account userAccount = new Account(user.Id);
+                user.AddAccountId(userAccount.Id);
 
-                await _context.User.AddAsync(model);
+                await _context.User.AddAsync(user);
                 await _context.Account.AddAsync(userAccount);
                 await _context.SaveChangesAsync();
 
-                model.HidePassword();
-                return Ok(model);
+                user.HidePassword();
+                return Ok(user);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest("Erro ao criar o usuário, favor tentar novamente!");
+                return BadRequest("Erro ao criar o usuário, favor tentar novamente! " + ex.Message);
             }
 
         }

@@ -1,16 +1,16 @@
 ﻿
+using System;
+
 namespace DreamCash.Models
 {
-    public class Account
+    public class Account : Entity
     {
-        public Account(int userId)
+        public Account(Guid userId)
         {
             UserId = userId;
         }
-
-        public int Id { get; set; }
         public decimal Amount { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }

@@ -21,16 +21,15 @@ namespace DreamCash.Migrations
 
             modelBuilder.Entity("DreamCash.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -42,10 +41,9 @@ namespace DreamCash.Migrations
 
             modelBuilder.Entity("DreamCash.Models.Admin.Admin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -60,10 +58,9 @@ namespace DreamCash.Migrations
 
             modelBuilder.Entity("DreamCash.Models.Investiment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -71,20 +68,24 @@ namespace DreamCash.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Investiment");
                 });
 
             modelBuilder.Entity("DreamCash.Models.Transaction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
@@ -92,8 +93,8 @@ namespace DreamCash.Migrations
                     b.Property<DateTime>("InvestimentDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("InvestimentId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("InvestimentId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -101,8 +102,8 @@ namespace DreamCash.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("numeric");
@@ -120,19 +121,18 @@ namespace DreamCash.Migrations
 
             modelBuilder.Entity("DreamCash.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<string>("Birthday")
+                        .HasColumnType("text");
 
                     b.Property<string>("Document")
                         .HasColumnType("text");
@@ -166,6 +166,13 @@ namespace DreamCash.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DreamCash.Models.Investiment", b =>
+                {
+                    b.HasOne("DreamCash.Models.User", null)
+                        .WithMany("Investiments")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("DreamCash.Models.Transaction", b =>
                 {
                     b.HasOne("DreamCash.Models.Account", "Account")
@@ -181,7 +188,7 @@ namespace DreamCash.Migrations
                         .IsRequired();
 
                     b.HasOne("DreamCash.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
