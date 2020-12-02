@@ -8,7 +8,7 @@ namespace DreamCash.Email
     {
         public bool sendMail(string to, string assunto, string body)
         {
-            string from = "marcosrogerionino987654321@gmail.com";
+            string from = "dream.cash.contato@gmail.com";
             string displayName = "Dream Cash - Recuperar Senha";
             try
             {
@@ -24,7 +24,7 @@ namespace DreamCash.Email
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(from, "Chapada2012-");
+                client.Credentials = new NetworkCredential(from, "dreamcash123");
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 client.Send(mail);
