@@ -20,7 +20,7 @@ namespace DreamCash.Models
         public Guid AccountId { get; set; }
         public Account Account { get; set; }
         public Guid InvestimentId { get; set; }
-        public Investiment Investiment { get; set; }
+        public Investment Investiment { get; set; }
         public decimal Value { get; set; }
         public DateTime InvestimentDate { get; set; }
         public string Status { get; set; }

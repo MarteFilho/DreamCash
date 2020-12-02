@@ -15,14 +15,16 @@ namespace DreamCash.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Investiment model)
+        public async Task<IActionResult> Create([FromBody] CreateInvestmentViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _context.Investiment.AddAsync(model);
+                var investment = new Investment(model.Type, model.Description, model.MinimumValue);
+
+                await _context.Investment.AddAsync(investment);
                 await _context.SaveChangesAsync();
                 return Ok(model);
             }
@@ -38,7 +40,7 @@ namespace DreamCash.Controllers
         {
             try
             {
-                var investiments = await _context.Investiment.AsNoTracking().ToListAsync();
+                var investiments = await _context.Investment.AsNoTracking().ToListAsync();
                 if (investiments == null)
                     return BadRequest("Nenhum investimento encontrado");
                 return Ok(investiments);

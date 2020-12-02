@@ -1,10 +1,8 @@
-﻿
-
-namespace DreamCash.Models
+﻿namespace DreamCash.Models
 {
-    public class Investiment : Entity
+    public class Investment : Entity
     {
-        public Investiment(string type, string description, long minimumValue)
+        public Investment(string type, string description, long minimumValue)
         {
             Type = type;
             Description = description;

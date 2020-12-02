@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DreamCash.Email;
 using DreamCash.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -138,6 +139,41 @@ namespace DreamCash.Controllers
             catch
             {
                 return BadRequest("Erro ao realizar o login, favor tentar novamente!");
+            }
+        }
+
+        [HttpPost]
+        [Route("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            try
+            {
+                var user = await _context.User.Where(x => x.Email == model.Email).AsNoTracking().FirstOrDefaultAsync();
+                if (user == null)
+                    return NotFound("Usuário não encontrado!");
+
+                var newPasswrod = Guid.NewGuid().ToString().Replace("-", "");
+                user.ResetPassword(newPasswrod);
+
+                EmailService email = new EmailService();
+                string template = email.GetTemplateHtml(EmailType.ResetPassword);
+                template = template.Replace("#SENHA#", newPasswrod);
+
+                var isSuccess = email.sendMail(model.Email, "Recuperação de Senha", template);
+                if (isSuccess)
+                {
+                    _context.Entry<User>(user).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return Ok("A sua nova senha foi enviada para o e-mail cadastrado!");
+                }
+
+                return BadRequest("Erro ao enviar o email com a nova senha do usuário!");
+            }
+            catch
+            {
+                return BadRequest("Erro ao realizar o reset de senha do usuário!");
             }
         }
 

@@ -3,15 +3,17 @@ using System;
 using DreamCash;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DreamCash.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201130022047_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,8 @@ namespace DreamCash.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -56,7 +58,7 @@ namespace DreamCash.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("DreamCash.Models.Investment", b =>
+            modelBuilder.Entity("DreamCash.Models.Investiment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +80,7 @@ namespace DreamCash.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Investment");
+                    b.ToTable("Investiment");
                 });
 
             modelBuilder.Entity("DreamCash.Models.Transaction", b =>
@@ -169,7 +171,7 @@ namespace DreamCash.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DreamCash.Models.Investment", b =>
+            modelBuilder.Entity("DreamCash.Models.Investiment", b =>
                 {
                     b.HasOne("DreamCash.Models.User", null)
                         .WithMany("Investiments")
@@ -184,7 +186,7 @@ namespace DreamCash.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DreamCash.Models.Investment", "Investiment")
+                    b.HasOne("DreamCash.Models.Investiment", "Investiment")
                         .WithMany()
                         .HasForeignKey("InvestimentId")
                         .OnDelete(DeleteBehavior.Cascade)

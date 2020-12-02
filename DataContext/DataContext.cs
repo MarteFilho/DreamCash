@@ -14,7 +14,7 @@ namespace DreamCash
         public DbSet<User> User { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
-        public DbSet<Investiment> Investiment { get; set; }
+        public DbSet<Investment> Investment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

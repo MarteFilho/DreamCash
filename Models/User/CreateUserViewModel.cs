@@ -16,7 +16,7 @@ namespace DreamCash.Models
 
         [Required(ErrorMessage = "Favor inserir o e-mail do usuário!")]
         [MinLength(3)]
-        [MaxLength(20)]
+        [MaxLength(50)]
         [EmailAddress]
         public string Email { get; set; }
 

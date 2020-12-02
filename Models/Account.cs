@@ -9,7 +9,7 @@ namespace DreamCash.Models
         {
             UserId = userId;
         }
-        public decimal Amount { get; set; }
+        public long Amount { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
     }

@@ -29,7 +29,7 @@ namespace DreamCash.Models
         public Guid AccountId { get; set; }
         public Account Account { get; set; }
         public List<Transaction> Transactions { get; set; }
-        public List<Investiment> Investiments { get; set; }
+        public List<Investment> Investiments { get; set; }
 
         public void AddAccountId(Guid accountId)
         {
@@ -52,6 +52,12 @@ namespace DreamCash.Models
                 return true;
             }
             return false;
+        }
+
+        public void ResetPassword(string newPassword)
+        {
+            Password = newPassword;
+            EncryptPassword();
         }
 
         public void Update(string phone, string address)
