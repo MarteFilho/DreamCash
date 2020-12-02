@@ -8,5 +8,7 @@ namespace DreamCash.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        public string Document { get; set; }
     }
 }
