@@ -171,9 +171,9 @@ namespace DreamCash.Controllers
 
                 return BadRequest("Erro ao enviar o email com a nova senha do usuário!");
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest("Erro ao realizar o reset de senha do usuário!");
+                return BadRequest("Erro ao realizar o reset de senha do usuário! - " + ex.Message);
             }
         }
 
