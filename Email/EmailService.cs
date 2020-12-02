@@ -8,9 +8,8 @@ namespace DreamCash.Email
     {
         public bool sendMail(string to, string assunto, string body)
         {
-            string msge = "Erro ao enviar o e-mail, favor verifique os dados digitados!";
-            string from = "help.saudevida@gmail.com";
-            string displayName = "Saúde Vida - Recuperar Senha";
+            string from = "marcosrogerionino987654321@gmail.com";
+            string displayName = "Dream Cash - Recuperar Senha";
             try
             {
                 MailMessage mail = new MailMessage();
@@ -24,18 +23,16 @@ namespace DreamCash.Email
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(from, "saudevida123");
+                client.Credentials = new NetworkCredential(from, "Chapada2012-");
                 client.EnableSsl = true;
 
                 client.Send(mail);
-                msge = "E-mail enviado com êxito!";
+                return true;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
-
-            return true;
         }
         public string GetTemplateHtml(EmailType emailType)
         {

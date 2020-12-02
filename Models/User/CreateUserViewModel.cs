@@ -6,7 +6,7 @@ namespace DreamCash.Models
     {
         [Required(ErrorMessage = "Favor inserir o nomme do usuário!")]
         [MinLength(3, ErrorMessage = "Favor inserir um nome com pelo menos três caracteres!")]
-        [MaxLength(20, ErrorMessage = "Favor inserir um nome com até vinte caracteres!")]
+        [MaxLength(30, ErrorMessage = "Favor inserir um nome com até vinte caracteres!")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Favor inserir o documento do usuário!")]
@@ -37,12 +37,12 @@ namespace DreamCash.Models
 
         [Required(ErrorMessage = "Favor inserir o sexo do usuário!")]
         [MinLength(3)]
-        [MaxLength(20)]
+        [MaxLength(12)]
         public string Sex { get; set; }
 
         [Required(ErrorMessage = "Favor inserir o endereço do usuário!")]
         [MinLength(3)]
-        [MaxLength(20)]
+        [MaxLength(40)]
         public string Address { get; set; }
     }
 }
