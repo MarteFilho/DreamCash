@@ -26,11 +26,18 @@ namespace DreamCash.Models
         public string Birthday { get; set; }
         public string Sex { get; set; }
         public string Address { get; set; }
+        public bool AlertInvestments { get; set; }
+        public bool AlertTransfers { get; set; }
         public Guid AccountId { get; set; }
         public Account Account { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<Investment> Investiments { get; set; }
 
+        public void ActiveAlerts(bool alertInvestments, bool alertTransfers)
+        {
+            AlertInvestments = alertInvestments;
+            AlertTransfers = alertTransfers;
+        }
         public void AddAccountId(Guid accountId)
         {
             AccountId = accountId;

@@ -88,6 +88,30 @@ namespace DreamCash.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> ActiveAlerts([FromBody] ActiveAlertsViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var user = await _context.User.Where(x => x.Id == model.UserId).AsNoTracking().FirstOrDefaultAsync();
+                if (user == null)
+                    return NotFound("Usuário não encontrado!");
+
+                user.ActiveAlerts(model.AlertInvestments, model.AlertTransfers);
+                _context.Entry<User>(user).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return Ok(user);
+            }
+            catch
+            {
+                return BadRequest("Erro ao atualizar o usuário, favor tentar novamente!");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserViewModel model)
         {
@@ -192,6 +216,8 @@ namespace DreamCash.Controllers
                 user.Update(model.Phone, model.Address);
                 _context.Entry<User>(user).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
+                user.HidePassword();
 
                 return Ok(user);
             }
