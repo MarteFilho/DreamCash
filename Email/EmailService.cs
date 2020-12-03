@@ -30,7 +30,7 @@ namespace DreamCash.Email
                 client.Send(mail);
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

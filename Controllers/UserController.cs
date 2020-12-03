@@ -88,7 +88,8 @@ namespace DreamCash.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
+        [Route("alerts")]
         public async Task<IActionResult> ActiveAlerts([FromBody] ActiveAlertsViewModel model)
         {
             if (!ModelState.IsValid)
