@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace DreamCash.Controllers
         {
             try
             {
-                var userBalance = await _context.User.AsNoTracking().Where(x => x.Id == userId).Include(x => x.Account).FirstOrDefaultAsync();
+                var userBalance = await _context.User.AsNoTracking().Where(x => x.Id == userId).Include(x => x.Account).Include(x => x.Transactions).FirstOrDefaultAsync();
                 if (userBalance == null)
                     return NotFound("Usuário não encontrado");
                 userBalance.HidePassword();

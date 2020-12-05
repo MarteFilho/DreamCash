@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DreamCash.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201128012618_v1")]
+    [Migration("20201205184222_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,8 @@ namespace DreamCash.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -58,7 +58,7 @@ namespace DreamCash.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("DreamCash.Models.Investiment", b =>
+            modelBuilder.Entity("DreamCash.Models.Investment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,6 +66,9 @@ namespace DreamCash.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<long>("MinimumValue")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
@@ -77,7 +80,7 @@ namespace DreamCash.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Investiment");
+                    b.ToTable("Investment");
                 });
 
             modelBuilder.Entity("DreamCash.Models.Transaction", b =>
@@ -133,6 +136,12 @@ namespace DreamCash.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
+                    b.Property<bool>("AlertInvestments")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("AlertTransfers")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Birthday")
                         .HasColumnType("text");
 
@@ -168,7 +177,7 @@ namespace DreamCash.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DreamCash.Models.Investiment", b =>
+            modelBuilder.Entity("DreamCash.Models.Investment", b =>
                 {
                     b.HasOne("DreamCash.Models.User", null)
                         .WithMany("Investiments")
@@ -183,7 +192,7 @@ namespace DreamCash.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DreamCash.Models.Investiment", "Investiment")
+                    b.HasOne("DreamCash.Models.Investment", "Investiment")
                         .WithMany()
                         .HasForeignKey("InvestimentId")
                         .OnDelete(DeleteBehavior.Cascade)

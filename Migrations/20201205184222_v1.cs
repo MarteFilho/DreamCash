@@ -33,6 +33,8 @@ namespace DreamCash.Migrations
                     Birthday = table.Column<string>(nullable: true),
                     Sex = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    AlertInvestments = table.Column<bool>(nullable: false),
+                    AlertTransfers = table.Column<bool>(nullable: false),
                     AccountId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -45,7 +47,7 @@ namespace DreamCash.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
+                    Amount = table.Column<long>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -60,19 +62,20 @@ namespace DreamCash.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Investiment",
+                name: "Investment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Type = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    MinimumValue = table.Column<long>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Investiment", x => x.Id);
+                    table.PrimaryKey("PK_Investment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Investiment_User_UserId",
+                        name: "FK_Investment_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -103,9 +106,9 @@ namespace DreamCash.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transaction_Investiment_InvestimentId",
+                        name: "FK_Transaction_Investment_InvestimentId",
                         column: x => x.InvestimentId,
-                        principalTable: "Investiment",
+                        principalTable: "Investment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -123,8 +126,8 @@ namespace DreamCash.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Investiment_UserId",
-                table: "Investiment",
+                name: "IX_Investment_UserId",
+                table: "Investment",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -155,7 +158,7 @@ namespace DreamCash.Migrations
                 name: "Account");
 
             migrationBuilder.DropTable(
-                name: "Investiment");
+                name: "Investment");
 
             migrationBuilder.DropTable(
                 name: "User");
