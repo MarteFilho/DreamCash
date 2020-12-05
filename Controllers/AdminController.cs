@@ -59,5 +59,23 @@ namespace DreamCash.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("user")]
+        public async Task<IActionResult> GetUserByCpf([FromQuery] string cpf)
+        {
+            try
+            {
+                var user = await _context.User.AsNoTracking().Where(x => x.Document == cpf).Include(x => x.Account).FirstOrDefaultAsync();
+                if (user == null)
+                    return NotFound("Usuário não encontrado");
+                user.HidePassword();
+                return Ok(user);
+            }
+            catch
+            {
+                return BadRequest("Erro ao buscar as informações do usuário!");
+            }
+        }
     }
 }
