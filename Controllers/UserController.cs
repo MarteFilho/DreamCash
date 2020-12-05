@@ -6,6 +6,7 @@ using DreamCash.Email;
 using DreamCash.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DreamCash.Controllers
 {
@@ -45,7 +46,13 @@ namespace DreamCash.Controllers
                 if (transactions == null)
                     return NotFound("Nenhuma transação encontrada!");
 
-                return Ok(transactions);
+                decimal total = 0.0m;
+
+                foreach (var transaction in transactions)
+                {
+                    total += transaction.Value;
+                }
+                return Ok(new {transactions, totalAmountSpent = total});
             }
             catch
             {
